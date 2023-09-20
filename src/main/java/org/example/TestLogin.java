@@ -10,12 +10,11 @@ import static com.codeborne.selenide.WebDriverRunner.url;
 
 public class TestLogin {
     @Test
-    public void openLoginPageAndAssert() throws InterruptedException {
+    public void openLoginPageAndAssert() {
         loginPageUrl();
         $(By.name("username")).setValue("student");
         $(By.name("password")).setValue("Password123");
         $(By.xpath("//*[@id=\"submit\"]")).click();
-        Thread.sleep(3000);
         //Assert the loaded URL after login
         url().contentEquals("practicetestautomation.com/practice-test-login/");
 
@@ -28,13 +27,23 @@ public class TestLogin {
                 .should(Condition.visible);
     }
     @Test
-    public void testInvalidLogin() {
+    public void testInvalidUsernameLogin() {
         loginPageUrl();
-        $(By.name("username")).setValue("bad");
-        $(By.name("password")).setValue("bad");
+        //Type username incorrectUser into Username field
+        $(By.name("username")).setValue("incorrectUser");
+        $(By.name("password")).setValue("Password123");
         $(By.xpath("//*[@id=\"submit\"]")).click();
         $(By.xpath("//*[@id=\"error\"]"))
                 .shouldHave(Condition.text("Your username is invalid!"));
+    }@Test
+    public void testInvalidPasswordLogin() {
+        loginPageUrl();
+        //Type username incorrectUser into Username field
+        $(By.name("username")).setValue("student");
+        $(By.name("password")).setValue("incorrectPassword");
+        $(By.xpath("//*[@id=\"submit\"]")).click();
+        $(By.xpath("//*[@id=\"error\"]"))
+                .shouldHave(Condition.text("Your password is invalid!"));
     }
 
     public void loginPageUrl() {
