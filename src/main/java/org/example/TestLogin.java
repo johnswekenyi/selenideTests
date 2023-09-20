@@ -11,7 +11,7 @@ import static com.codeborne.selenide.WebDriverRunner.url;
 public class TestLogin {
     @Test
     public void openLoginPageAndAssert() throws InterruptedException {
-        Selenide.open("https://practicetestautomation.com/practice-test-login/");
+        loginPageUrl();
         $(By.name("username")).setValue("student");
         $(By.name("password")).setValue("Password123");
         $(By.xpath("//*[@id=\"submit\"]")).click();
@@ -29,11 +29,15 @@ public class TestLogin {
     }
     @Test
     public void testInvalidLogin() {
-        Selenide.open("https://practicetestautomation.com/practice-test-login/");
+        loginPageUrl();
         $(By.name("username")).setValue("bad");
         $(By.name("password")).setValue("bad");
         $(By.xpath("//*[@id=\"submit\"]")).click();
         $(By.xpath("//*[@id=\"error\"]"))
                 .shouldHave(Condition.text("Your username is invalid!"));
+    }
+
+    public void loginPageUrl() {
+        Selenide.open("https://practicetestautomation.com/practice-test-login/");
     }
 }
