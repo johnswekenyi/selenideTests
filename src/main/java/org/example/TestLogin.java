@@ -38,7 +38,7 @@ public class TestLogin {
     }@Test
     public void testInvalidPasswordLogin() {
         loginPageUrl();
-        //Type username incorrectPassword into Username field
+        //Type username incorrectPassword into password field
         $(By.name("username")).setValue("student");
         $(By.name("password")).setValue("incorrectPassword");
         $(By.xpath("//*[@id=\"submit\"]")).click();
