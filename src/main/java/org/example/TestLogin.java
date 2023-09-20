@@ -10,7 +10,7 @@ import static com.codeborne.selenide.WebDriverRunner.url;
 
 public class TestLogin {
     @Test
-    public void openLoginPage() throws InterruptedException {
+    public void openLoginPageAndAssert() throws InterruptedException {
         Selenide.open("https://practicetestautomation.com/practice-test-login/");
         $(By.name("username")).setValue("student");
         $(By.name("password")).setValue("Password123");
@@ -18,8 +18,14 @@ public class TestLogin {
         Thread.sleep(3000);
         //Assert the loaded URL after login
         url().contentEquals("practicetestautomation.com/practice-test-login/");
+
+        //Verify displayed text
         $(By.xpath("//*[@id=\"loop-container\"]/div/article/div[2]/p[1]/strong"))
                 .shouldHave((Condition.text("Congratulations student. You successfully logged in!")));
+
+        //Verify logout button is displayed
+        $(By.xpath("//*[@id=\"loop-container\"]/div/article/div[2]/div/div/div/a"))
+                .should(Condition.visible);
     }
     @Test
     public void testInvalidLogin() {
