@@ -27,3 +27,10 @@ The tests will be updated with time based off these scenarios:
 * Puch Submit button
 * Verify error message is displayed
 * Verify error message text is Your password is invalid!
+
+The project is written in Java and Maven for  dependency management. 
+
+### How to setup locally
+* Clone the project
+* Maven will automatically download all the dependencies that you need using the POM file
+* You then can either run individual tests or all the tests. 
